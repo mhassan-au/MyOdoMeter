@@ -5,15 +5,18 @@
 //
 // Responsibilities:
 // - Create logbook
-// - Read logbooks later
+// - Read logbooks
 //
 // UI components should call these functions
-// instead of directly accessing Firestore.
+// instead of accessing Firebase directly.
 
 
 import {
     addDoc,
     collection,
+    getDocs,
+    orderBy,
+    query,
     serverTimestamp
 } from "firebase/firestore";
 
@@ -48,5 +51,46 @@ export async function createLogbook(
 
 
     return ref.id;
+
+}
+
+
+
+
+// Get all logbooks
+export async function getLogbooks(): Promise<Logbook[]> {
+
+
+    const q = query(
+
+        collection(
+            db,
+            "logbooks"
+        ),
+
+        orderBy(
+            "createdAt",
+            "desc"
+        )
+
+    );
+
+
+    const snapshot = await getDocs(q);
+
+
+
+    return snapshot.docs.map(
+
+        (doc) => ({
+
+            id: doc.id,
+
+            ...doc.data()
+
+        } as Logbook)
+
+    );
+
 
 }
