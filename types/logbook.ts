@@ -1,30 +1,32 @@
-/**
- * ============================================================================
- * File: types/logbook.ts
- * Project: MyOdoMeter
- * ----------------------------------------------------------------------------
- * Purpose:
- *   Defines the Logbook data model used throughout the application.
- *
- * A logbook represents:
- *   - One vehicle
- *   - One financial year
- *   - One ATO tracking period
- *
- * Related files:
- *   - lib/logbooks.ts
- *   - components/LogbookCard.tsx
- *   - components/LogbookForm.tsx
- * ============================================================================
- */
+// File: types/logbook.ts
+//
+// Purpose:
+// Defines the Logbook data structure.
+//
+// Used by:
+// - LogbookForm component
+// - Logbooks page
+// - Firebase logbook functions
+//
+// A logbook belongs to:
+// - One vehicle
+// - One financial year
 
-export interface Logbook {
-  id?: string;
-  familyId: string;
-  vehicleId: string;
-  financialYear: string;
-  startDate: string;
-  endDate: string;
-  startOdometer: number;
-  status: "Active" | "Closed";
-}
+
+export type Logbook = {
+
+    id?: string;
+
+    vehicleId: string;
+
+    financialYear: string;
+
+    startOdometer: number;
+
+    startDate: string;
+
+    endDate?: string;
+
+    status: "Active" | "Closed";
+
+};
